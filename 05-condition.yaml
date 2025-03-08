@@ -18,6 +18,6 @@
     become: yes    #we need sudo access for this task only
     ansible.builtin.user:
       name: roboshop
-      when: output.rc !=0
+    when: output.rc !=0
     
   
