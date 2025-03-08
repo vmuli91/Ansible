@@ -1,0 +1,10 @@
+-name: variables from files
+ hosts: mongodb
+ become: yes
+ vars_files:
+ - /c/Users/ASUS/repos/Ansible/variables.yaml
+
+ tasks:
+ - name: printing the varaibles
+   ansible.builtin.debug:
+     msg: "I am learing {{COURSE}}, trainer is {{TRAINER}}, duration is {{DURATION}}"

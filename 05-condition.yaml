@@ -1,0 +1,23 @@
+- name: creating user
+  hosts: localhost
+  tasks: 
+  - name: check user is existed or not
+    # when user doesnt exist, ansible treating it as failure and comes out default so
+    # ignore_errors: true
+    ansible.builtin.command: id roboshop
+    register: output # output is varaible name
+    ignore_errors: true
+
+  - name: print the command output
+    ansible.builtin.debug:
+      msg: "output is : {{output}}"
+  - name: print the exit status
+    ansible.builtin.debug:
+      msg: "{{output.rc}}" #rc --> exit staus
+  - name: create user roboshop
+    become: yes    #we need sudo access for this task only
+    ansible.builtin.user:
+      name: roboshop
+      when: output.rc !=0
+    
+  
